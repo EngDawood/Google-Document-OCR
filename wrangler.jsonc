@@ -1,0 +1,49 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "google-document-ocr",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+
+  // Hourly cleanup of expired results.
+  "triggers": { "crons": ["17 * * * *"] },
+
+  "d1_databases": [
+    // Run `wrangler d1 create ocr-db` and paste the database_id here.
+    { "binding": "DB", "database_name": "ocr-db", "database_id": "REPLACE_WITH_YOUR_D1_ID", "migrations_dir": "migrations" }
+  ],
+  "r2_buckets": [
+    // Run `wrangler r2 bucket create ocr-results`.
+    { "binding": "RESULTS", "bucket_name": "ocr-results" }
+  ],
+
+  // Non-secret settings. Secrets (GCP_SERVICE_ACCOUNT_JSON, API_TOKENS) go in `wrangler secret put`.
+  "vars": {
+    // --- Google Document AI ---
+    "GCP_PROJECT_ID": "your-gcp-project-id",
+    "GCP_LOCATION": "us",
+    "DOCAI_PROCESSOR_ID": "your-processor-id",
+    "DOCAI_PROCESSOR_VERSION": "",
+
+    // --- Usage guard (pages). 0 disables a limit. ---
+    "MONTHLY_PAGE_LIMIT": "900",
+    "DAILY_PAGE_LIMIT": "0",
+    "MAX_PAGES_PER_FILE": "30",
+    "MAX_FILE_MB": "20",
+
+    // --- OCR defaults (requests can override unless noted) ---
+    "IMAGELESS_MODE": "true",
+    "DEFAULT_LANGUAGE_HINTS": "",
+    "DEFAULT_NATIVE_PDF_PARSING": "false",
+    // Premium add-ons (math, checkboxes, font style) are billed extra. Requests cannot enable them unless this is true.
+    "ALLOW_PREMIUM_FEATURES": "false",
+
+    // --- Retention (days) ---
+    "RETENTION_DAYS": "7",
+    "MAX_RETENTION_DAYS": "30",
+
+    // --- Cloudflare Access (optional). Leave empty to use API tokens only. ---
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": ""
+  }
+}

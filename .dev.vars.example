@@ -1,0 +1,4 @@
+# Local secrets for `wrangler dev`. Copy to .dev.vars (git-ignored).
+API_TOKENS="change-me"
+# Paste the whole service account JSON on one line, inside single quotes.
+GCP_SERVICE_ACCOUNT_JSON='{"type":"service_account","client_email":"...","private_key":"-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"}'

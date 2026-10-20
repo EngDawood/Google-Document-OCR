@@ -1,0 +1,26 @@
+{
+  "name": "google-document-ocr",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal OCR server on Cloudflare Workers using Google Document AI. PDF/image to Markdown or plain text.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "db:migrate": "wrangler d1 migrations apply ocr-db --remote",
+    "db:migrate:local": "wrangler d1 migrations apply ocr-db --local"
+  },
+  "dependencies": {
+    "hono": "^4.13.13",
+    "jose": "^6.2.13",
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261019.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12",
+    "wrangler": "^4.151.3"
+  }
+}
