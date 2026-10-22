@@ -165,11 +165,13 @@ npm test                          # unit tests
 npm run typecheck
 ```
 
-## Roadmap
+## Docs
 
-- **Large PDFs**: split files above the 15/30-page online limit into chunks, or use Document AI batch processing through Cloud Storage
-- **Layout Parser** processor for structure-aware Markdown (headings, tables, lists)
-- Searchable PDF output (needs Arabic font shaping for the text layer)
+- [Architecture](docs/architecture.md): request flow, modules, data, quota and retention
+- [Google Document AI reference](docs/google-document-ai.md): API fields, limits, versions
+- [Decisions](docs/decisions.md): what was decided and why
+- [Roadmap](docs/roadmap.md): PDF splitting, Layout Parser, searchable PDF
+- [Testing](docs/testing.md): unit tests and local end-to-end checks
 
 ## Credits
 
